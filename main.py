@@ -62,7 +62,7 @@ def DM():
 
 def one_vs_one():
 
-    vs = 'sv_cheats 1;sv_infite_ammo 2;sv_alltalk 1;sv_deadtalk 1;bot_kick;mp_free_armor 1;mp_roundtime 60;mp_warmup_end 1;'
+    vs = 'sv_cheats 1;sv_infinite_ammo 2;sv_alltalk 1;sv_deadtalk 1;bot_kick;mp_free_armor 1;mp_roundtime 60;mp_warmup_end 1;'
 
     clear()
     print(f.renderText('1 vs 1'))
