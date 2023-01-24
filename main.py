@@ -5,6 +5,7 @@ from os import system
 
 init(autoreset=True)
 
+f = Figlet()
 
 def clear():
     system('cls')
@@ -12,7 +13,6 @@ def clear():
 
 def mapPeek():
 
-    clear()
     selected = None    
     maps = [
         'de_cache','de_dust2','de_mirage',
@@ -22,22 +22,26 @@ def mapPeek():
 
     while not selected in maps:
         clear()
+        print(f.renderText('Deathmatch'))
         print(Fore.YELLOW + 'Mapas')
         for map in maps:
             print(map)
         
         selected = input('\nEscribir nombre del mapa: ')
 
-    clear()
     return 'map ' + selected + ';'
 
 
 def DM():
 
+    clear()
+    print(f.renderText('Deathmatch'))
+
     load_mode = f'game_type 1; game_mode 2;{mapPeek()}'
     dm = 'mp_ignore_round_win_conditions 1;bot_kick;mp_limitteams 0;mp_autoteambalance 0;'
 
     clear()
+    print(f.renderText('Deathmatch'))
     difficulty = 0
     print(Fore.YELLOW + 'BOTS')
     ct = int(input('Cantidad de ' + Fore.CYAN + 'CTs' + Fore.RESET + ': '))
@@ -45,6 +49,7 @@ def DM():
 
     while not difficulty in range(1,5):
         clear()
+        print(f.renderText('Deathmatch'))
         print(Fore.CYAN + 'CTs' + Fore.RESET + f': {ct}     ' + Fore.RED + 'TTs' + Fore.RESET + f': {tt}')
         print('\n0 = easy  1 = normal  2 = hard  3 = expert')
         difficulty = int(input('Dificultad: '))
@@ -60,7 +65,7 @@ def one_vs_one():
     vs = 'sv_cheats 1;sv_infite_ammo 2;sv_alltalk 1;sv_deadtalk 1;bot_kick;mp_free_armor 1;mp_roundtime 60;mp_warmup_end 1;'
 
     clear()
-    print(Fore.YELLOW + '1v1')
+    print(f.renderText('1 vs 1'))
     freezetime = int(input('Segundos de congelacion: '))
     delay = int(input('Segundos para comenzar la siguiente ronda: '))
     max_rounds = int(input('Rondas: '))
@@ -89,6 +94,7 @@ def main():
 
     if mode == 1:
         command = DM()
+        print(f.renderText('Deathmatch'))
         print(Fore.GREEN + '# Comando copiado')
         print(Fore.YELLOW + '- Pegar en la consola de CSGO')
         print(Fore.YELLOW + '- Esperar que cargue el mapa')
@@ -96,6 +102,7 @@ def main():
         input('\nEnter para finalizar...')
     elif mode == 2:
         command = one_vs_one()
+        print(f.renderText('1 vs 1'))
         print(Fore.GREEN + '# Comando copiado')
         print(Fore.YELLOW + '- Entrar a un mapa de CSGO')
         print(Fore.YELLOW + '- Pegar comando en consola')
@@ -104,6 +111,7 @@ def main():
         return
 
     pc.copy(command)
+    clear()
 
 
 main()
