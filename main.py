@@ -32,9 +32,9 @@ def mapPeek():
     return 'map ' + selected + ';'
 
 
-def DM(mapa):
+def DM():
 
-    load_mode = f'game_type 1; game_mode 2;{mapa}'
+    load_mode = f'game_type 1; game_mode 2;{mapPeek()}'
     dm = 'mp_ignore_round_win_conditions 1;bot_kick;mp_limitteams 0;mp_autoteambalance 0;'
 
     clear()
@@ -55,12 +55,25 @@ def DM(mapa):
     return cmd + load_mode
 
 
-def Practica(): #TODO
-    pass
+def one_vs_one():
+
+    vs = 'sv_cheats 1;sv_infite_ammo 2;sv_alltalk 1;sv_deadtalk 1;bot_kick;mp_free_armor 1;mp_roundtime 60;mp_warmup_end 1;'
+
+    clear()
+    print(Fore.YELLOW + '1v1')
+    freezetime = int(input('Segundos de congelacion: '))
+    delay = int(input('Segundos para comenzar la siguiente ronda: '))
+    max_rounds = int(input('Rondas: '))
+    overtime = int(input('Overtime (0 = no | 1 = si): '))
+
+    cmd = vs + f'mp_freezetime {freezetime};' + f'mp_round_restart_delay {delay};' + f'mp_maxrounds {max_rounds};' + f'mp_overtime_enable {overtime};' + 'mp_restartgame 1;'
+
+    clear()
+    return cmd
 
 
 def main():
-    modos = ['Deathmatch']
+    modos = ['Deathmatch','1v1']
     mode = 0
     f = Figlet()
 
@@ -73,11 +86,20 @@ def main():
             print(f'{modos.index(m)+1} - {m}' )
         
         mode = int(input())
-    
-    mapa = mapPeek()
 
     if mode == 1:
-        command = DM(mapa)
+        command = DM()
+        print(Fore.GREEN + '# Comando copiado')
+        print(Fore.YELLOW + '- Pegar en la consola de CSGO')
+        print(Fore.YELLOW + '- Esperar que cargue el mapa')
+        print(Fore.YELLOW + '- Escribir ok en consola')
+        input('\nEnter para finalizar...')
+    elif mode == 2:
+        command = one_vs_one()
+        print(Fore.GREEN + '# Comando copiado')
+        print(Fore.YELLOW + '- Entrar a un mapa de CSGO')
+        print(Fore.YELLOW + '- Pegar comando en consola')
+        input('\nEnter para finalizar...')
     else:
         return
 
@@ -85,9 +107,3 @@ def main():
 
 
 main()
-
-print(Fore.GREEN + '# Comando copiado')
-print(Fore.YELLOW + '- Pegar en la consola de CSGO')
-print(Fore.YELLOW + '- Esperar que cargue el mapa')
-print(Fore.YELLOW + '- Escribir ok en consola')
-input('\nEnter para finalizar...')
