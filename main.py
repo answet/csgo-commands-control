@@ -7,6 +7,7 @@ init(autoreset=True)
 
 f = Figlet()
 
+
 def clear():
     system('cls')
 
@@ -38,7 +39,7 @@ def DM():
     print(f.renderText('Deathmatch'))
 
     load_mode = f'game_type 1; game_mode 2;{mapPeek()}'
-    dm = 'mp_ignore_round_win_conditions 1;bot_kick;mp_limitteams 0;mp_autoteambalance 0;'
+    dm = 'mp_ignore_round_win_conditions 1;mp_limitteams 0;mp_autoteambalance 0;bot_kick'
 
     clear()
     print(f.renderText('Deathmatch'))
@@ -54,7 +55,7 @@ def DM():
         print('\n0 = easy  1 = normal  2 = hard  3 = expert')
         difficulty = int(input('Dificultad: '))
 
-    cmd = 'alias ok "' + dm + 'bot_add ct;'*ct + 'bot_add t;'*tt + f'bot_difficulty {difficulty}' + '";'
+    cmd = f'alias 1 "{dm}";' + 'alias 2 "' + 'bot_add_ct;'*ct + 'bot_add_t;'*tt + f'bot_difficulty {difficulty}' + '";'
 
     clear()
     return cmd + load_mode
@@ -90,7 +91,7 @@ def main():
         for m in modos:
             print(f'{modos.index(m)+1} - {m}' )
         
-        mode = int(input())
+        mode = int(input('\n'))
 
     if mode == 1:
         command = DM()
@@ -98,7 +99,8 @@ def main():
         print(Fore.GREEN + '# Comando copiado')
         print(Fore.YELLOW + '- Pegar en la consola de CSGO')
         print(Fore.YELLOW + '- Esperar que cargue el mapa')
-        print(Fore.YELLOW + '- Escribir ok en consola')
+        print(Fore.YELLOW + '- Escribir 1 en consola')
+        print(Fore.YELLOW + '- Escribir 2 en consola')
         input('\nEnter para finalizar...')
     elif mode == 2:
         command = one_vs_one()
